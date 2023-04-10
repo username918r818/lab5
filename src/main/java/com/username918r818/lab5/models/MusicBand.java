@@ -100,4 +100,11 @@ public class MusicBand {
 	public void setBestAlbum(Album bestAlbum) {
 		this.bestAlbum = bestAlbum;
 	}
+
+	@Override
+	public String toString() {
+		return "MusicBand [uuid=" + uuid + ", name=" + name + ", coordinates=" + coordinates + ", creationDate="
+				+ creationDate + ", numberOfParticipants=" + numberOfParticipants + ", genre=" + genre + ", bestAlbum="
+				+ bestAlbum + "]";
+	}
 }

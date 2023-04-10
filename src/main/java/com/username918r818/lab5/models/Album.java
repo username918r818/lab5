@@ -53,15 +53,10 @@ public class Album {
 		this.sales = sales;
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Album{name='").append(name).append("', ");
-		sb.append("tracks=").append(tracks).append(", ");
-		if (sales == null) {
-			sb.append("sales=null}");
-		} else {
-			sb.append("sales=").append(sales).append("}");
-		}
-		return sb.toString();
+		return "Album [name=" + name + ", tracks=" + tracks + ", sales=" + sales + "]";
 	}
+
+
 }
