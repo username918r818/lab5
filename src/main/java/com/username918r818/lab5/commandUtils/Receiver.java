@@ -1,4 +1,4 @@
-package com.username918r818.lab5.commands;
+package com.username918r818.lab5.commandUtils;
 
 public class Receiver {
 	

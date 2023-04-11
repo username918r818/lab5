@@ -1,7 +1,9 @@
-package com.username918r818.lab5.commands;
+package com.username918r818.lab5.commandUtils;
+
+import com.username918r818.lab5.commands.Help;
 
 public class CommandFabric {
-	
+
 	public static Command get(CommandType type, Receiver receiver, String... args) {
 		Command command = null;
 		if (type == null) {
@@ -20,8 +22,8 @@ public class CommandFabric {
 	public static Command get(String type, Receiver receiver, String... args) {
 		try {
 			return get(CommandType.valueOf(type), receiver, args);
-	   	} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			return null;
-	   	}
+		}
 	}
 }

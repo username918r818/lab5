@@ -1,4 +1,4 @@
-package com.username918r818.lab5.commands;
+package com.username918r818.lab5.commandUtils;
 
 import java.util.HashMap;
 
@@ -7,7 +7,7 @@ public class CommandPanel {
 	private Invoker invoker;
 	HashMap<String, Command> commandMap = new HashMap<>();
 
-	{	
+	{
 		// commandMap.put("help", new Help());
 	}
 
@@ -30,7 +30,28 @@ public class CommandPanel {
 		this.invoker.execute(command);
 	}
 
-	
+	public void setReceiver(Receiver receiver) {
+		this.receiver = receiver;
+	}
 
+	public void setInvoker(Invoker invoker) {
+		this.invoker = invoker;
+	}
+
+	public void setCommandMap(HashMap<String, Command> commandMap) {
+		this.commandMap = commandMap;
+	}
+
+	public Receiver getReceiver() {
+		return receiver;
+	}
+
+	public Invoker getInvoker() {
+		return invoker;
+	}
+
+	public HashMap<String, Command> getCommandMap() {
+		return commandMap;
+	}
 
 }

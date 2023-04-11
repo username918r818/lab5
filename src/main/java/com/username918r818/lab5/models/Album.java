@@ -58,5 +58,4 @@ public class Album {
 		return "Album [name=" + name + ", tracks=" + tracks + ", sales=" + sales + "]";
 	}
 
-
 }
