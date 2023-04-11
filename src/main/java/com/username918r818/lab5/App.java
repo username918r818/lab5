@@ -1,33 +1,38 @@
 package com.username918r818.lab5;
 
 import com.username918r818.lab5.commands.*;
-import java.util.Scanner;
+
 import java.util.Arrays;
 import java.util.HashMap;
-import com.username918r818.lab5.Test;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Executor executor = new Executor();
+        Receiver receiver = new Receiver();
         Invoker invoker = new Invoker();
-        CommandPanel commandPanel = new CommandPanel(executor, invoker);
         
-
-        Scanner scanner = new Scanner(System.in);
+        var cTypes = new HashMap<String, CommandType>();
+        cTypes.put("help", CommandType.HELP);
+        
+        Scanner scanner = new Scanner(System.in).useDelimiter("");;
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] words = line.trim().split("\\s+"); // Этот метод использует регулярное выражение \\s+ для
                                                         // разделения строки на массив слов. Метод trim() удаляет
                                                         // начальные и конечные пробелы из строки. Вы можете
                                                         // использовать этот метод таким образом
-            // Command command = commandMap.get(words[0]);
-            // if (command == null) {
-            //     System.out.println("Неверная команда. Воспользуйтесь командой help");
-            //     break;
-            // }
-            // commandPanel.mm
-            // String[] vArgs = Arrays.copyOfRange(words, 1, words.length);
-            // invoker.execute(command.invokeCommand(vArgs));
+            if (line.equals("")) {
+                System.out.println("Уберите лапку вашего котика от клавиши \"Enter\", в потоке ввода пустая строка.");
+                continue;
+            }
+            
+            Command command = CommandFabric.get(cTypes.get(words[0]), receiver, Arrays.copyOfRange(words, 1, words.length));     
+            if (command == null) {
+                System.out.println("Уберите вашего котика с клавиатуры.");
+                continue;
+            }
+
+            invoker.execute(command);
         }
         scanner.close();
     }

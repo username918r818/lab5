@@ -2,21 +2,17 @@ package com.username918r818.lab5.commands;
 
 import java.util.HashMap;
 
-import com.username918r818.lab5.Command;
-import com.username918r818.lab5.Executor;
-import com.username918r818.lab5.Invoker;
-
 public class CommandPanel {
-	private Executor executor;
+	private Receiver receiver;
 	private Invoker invoker;
 	HashMap<String, Command> commandMap = new HashMap<>();
 
 	{	
-		commandMap.put("help", new Help());
+		// commandMap.put("help", new Help());
 	}
 
-	public CommandPanel(Executor executor, Invoker invoker) {
-		this.executor = executor;
+	public CommandPanel(Receiver receiver, Invoker invoker) {
+		this.receiver = receiver;
 		this.invoker = invoker;
 	}
 
@@ -30,7 +26,7 @@ public class CommandPanel {
 			System.out.println("Неверная команда. Воспользуйтесь командой help");
 			return;
 		}
-		command.setCommand(executor, args);
+		// command.setCommand(receiver, args);
 		this.invoker.execute(command);
 	}
 

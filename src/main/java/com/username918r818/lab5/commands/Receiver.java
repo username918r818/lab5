@@ -1,6 +1,6 @@
-package com.username918r818.lab5;
+package com.username918r818.lab5.commands;
 
-public class Executor {
+public class Receiver {
 	
 	public void help() {
 		System.out.println("help : вывести справку по доступным командам");
