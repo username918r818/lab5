@@ -59,7 +59,7 @@ public class CollectionHandler {
 	}
 
 
-	public void removeByID(UUID uuid) {
+	public void removeByUUID(UUID uuid) {
 		boolean isThereAModel = false;
 		for (var i : collection) {
 			if (i.getUUID().equals(uuid)) {
