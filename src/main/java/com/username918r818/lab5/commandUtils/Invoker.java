@@ -4,14 +4,19 @@ import java.util.ArrayList;
 // import java.util.Stack;
 
 public class Invoker {
-	private ArrayList<Command> history = new ArrayList<>();
+	// private ArrayList<Command> history = new ArrayList<>();
 	// private Stack<Command> cancelledСommands = new Stack<>();
 
 	public void execute(Command command) {
-		history.add(command);
+		hook(command);
 		command.execute();
 	}
 
+	public void hook(Command command){
+		var reciever = command.getReceiver();
+		reciever.addHistory(command);
+	}
+	// а зачем нужен инвокер?
 	/*
 	 * public void undo() {
 	 * if (history.size() > 0){

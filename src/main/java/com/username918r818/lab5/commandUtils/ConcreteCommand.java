@@ -19,12 +19,10 @@ public abstract class ConcreteCommand implements Command {
 	}
 
 	public void setArgs(String... args) {
-		// this.args = Arrays.copyOf(args, args.length);
 		this.args = args;
 	}
 
 	public void setReceiver(Receiver receiver) {
 		this.receiver = receiver;
 	}
-
 }

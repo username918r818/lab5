@@ -147,7 +147,7 @@ public class AppTest {
         band4.setName("new band");
 
         ch1.update(band4);
-        ch1.removeByID(band4.getUUID());
+        ch1.removeByUUID(band4.getUUID());
     }
 
 

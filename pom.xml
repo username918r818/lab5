@@ -9,8 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>lab5</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/username918r818/lab5</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -66,6 +65,13 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+            <configuration>
+              <archive>
+                <manifest>
+              <mainClass>com.username918r818.lab5.App</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -83,6 +89,29 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+              <descriptorRefs>
+                  <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                  <manifest>
+                      <mainClass>com.username918r818.lab5.App</mainClass>
+                  </manifest>
+              </archive>
+          </configuration>
+          <executions>
+              <execution>
+                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                  <phase>package</phase> <!-- bind to the packaging phase -->
+                  <goals>
+                      <goal>single</goal>
+                  </goals>
+              </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
