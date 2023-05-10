@@ -9,7 +9,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -71,7 +70,6 @@ public class AppTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void HashMapsAndJSON() {
         Coordinates coordinates1 = new Coordinates(1, 2.0);
         Coordinates coordinates2 = new Coordinates(3, 4.0);
@@ -109,9 +107,9 @@ public class AppTest {
         assertTrue(json4.equals(json5));
         assertTrue(!(json1.equals(json5)));
 
-        var band6 = ModelHandler.mapToModel((Map<String, String>) JsonHandler.JSONToMap(json1));
-        var band7 = ModelHandler.mapToModel((Map<String, String>) JsonHandler.JSONToMap(json2));
-        var band8 = ModelHandler.mapToModel((Map<String, String>) JsonHandler.JSONToMap(json4));
+        var band6 = ModelHandler.mapToModel((HashMap<String, String>) JsonHandler.JSONToMap(json1));
+        var band7 = ModelHandler.mapToModel((HashMap<String, String>) JsonHandler.JSONToMap(json2));
+        var band8 = ModelHandler.mapToModel((HashMap<String, String>) JsonHandler.JSONToMap(json4));
 
         assertTrue(!(band6.toString().equals(band7.toString())));
         assertTrue(band7.toString().equals(band8.toString()));
@@ -147,7 +145,7 @@ public class AppTest {
         band4.setName("new band");
 
         ch1.update(band4);
-        ch1.removeByID(band4.getUUID());
+        ch1.removeByUUID(band4.getUUID());
     }
 
 
@@ -187,7 +185,6 @@ public class AppTest {
     }
 
     @Test 
-	@SuppressWarnings({"rawtypes", "unchecked"})
     public void CHtoJSON(){
 
 
@@ -215,10 +212,10 @@ public class AppTest {
         var s1 = ch1.save();
         var m1 = JsonHandler.JSONToMap(s1);
         var ch2 = new CollectionHandler(ZonedDateTime.parse(m1.get("initDate").toString()));
-        var m2 = (HashMap) m1.get("models");
+        var m2 = JsonHandler.JSONToMap(m1.get("models"));
 
         for (var i : m2.keySet()) {
-            ch2.add(ModelHandler.mapToModel((HashMap)m2.get(i)));
+            ch2.add(ModelHandler.mapToModel(JsonHandler.JSONToMap(m2.get(i))));
         }
 
         assertTrue(ch1.show().equals(ch2.show()));

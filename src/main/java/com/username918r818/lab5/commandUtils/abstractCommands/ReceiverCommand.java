@@ -1,11 +1,19 @@
-package com.username918r818.lab5.commandUtils;
+package com.username918r818.lab5.commandUtils.abstractCommands;
 
-public abstract class ConcreteCommand implements Command {
+import com.username918r818.lab5.commandUtils.Command;
+import com.username918r818.lab5.commandUtils.Receiver;
+
+/**
+ * Abstract command class for receiver command.
+ * 
+ * @author Kirill Zakusov
+ */
+public abstract class ReceiverCommand implements Command {
 
 	private Receiver receiver;
 	private String[] args;
 
-	public ConcreteCommand(Receiver receiver, String... args) {
+	public ReceiverCommand(Receiver receiver, String... args) {
 		this.receiver = receiver;
 		this.args = args;
 	}

@@ -1,16 +1,19 @@
 package com.username918r818.lab5.commands;
 
-import com.username918r818.lab5.commandUtils.ConcreteCommand;
-import com.username918r818.lab5.commandUtils.Receiver;
+import com.username918r818.lab5.commandUtils.Client;
+import com.username918r818.lab5.commandUtils.abstractCommands.ClientCommand;
 
-public class Exit extends ConcreteCommand {
-
-	public Exit(Receiver receiver, String... args) {
-		super(receiver, args);
+public class Exit extends ClientCommand {
+	/**
+	 * @param client
+	 * @param args
+	 */
+	public Exit(Client client, String... args) {
+		super(client, args);
 	}
 
 	public void execute() {
-		super.getReceiver().exit(getArgs());
+		super.getClient().exit(getArgs());
 	}
 
 }

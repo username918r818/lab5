@@ -36,9 +36,15 @@ public class CollectionHandler {
 		if (collection.isEmpty()) {
 			return "The collection is empty";
 		}
+		boolean notFirst = false;
 		for (var i : collection) {
-			result.append(i.toString()).append('\n');
+			if (notFirst) {
+				result.append("\n");
+			}
+			notFirst = true;
+			result.append(i.toString());
 		}
+
 		return result.toString();
 	}
 
@@ -56,7 +62,7 @@ public class CollectionHandler {
 		var uuid = mb.getUUID();
 		for (var i : collection) {
 			if (i.getUUID().equals(uuid)) {
-				throw new IllegalArgumentException("object with the same UUID have already been added");
+				throw new IllegalArgumentException("Музыкальная группа с таким UUID уже существует");
 			}
 		}
 		collection.add(mb);
@@ -82,7 +88,7 @@ public class CollectionHandler {
 			}
 		}
 		if (isThereAModel == false) {
-			throw new IllegalArgumentException("object with the UUID have not been added yet");
+			throw new IllegalArgumentException("Музыкальная группа с таким UUID не существует");
 		}
 		collection.add(mb);
 		this.sort();
@@ -105,7 +111,7 @@ public class CollectionHandler {
 			}
 		}
 		if (isThereAModel == false) {
-			throw new IllegalArgumentException("object with the UUID have not been added yet");
+			throw new IllegalArgumentException("Музыкальная группа с таким UUID не существует");
 		}
 	}
 
@@ -122,14 +128,14 @@ public class CollectionHandler {
 	 * @return A JSON string representing the collection of models and their UUIDs.
 	 */
 	public String save() {
-		var result = new HashMap<>();
+		var result = new HashMap<String, String>();
 		result.put("initDate", initDate.toString());
-		var models = new HashMap<>();
+		var models = new HashMap<String, String>();
 
 		for (var i : collection) {
-			models.put(i.getUUID().toString(), ModelHandler.modelToMap(i));
+			models.put(i.getUUID().toString(), JsonHandler.mapToJSON(ModelHandler.modelToMap(i)));
 		}
-		result.put("models", models);
+		result.put("models", JsonHandler.mapToJSON(models));
 		var resultStr = JsonHandler.mapToJSON(result);
 
 		return resultStr;
@@ -162,7 +168,11 @@ public class CollectionHandler {
 				names.put(i.getName(), 1);
 			}
 		}
-		return JsonHandler.mapToJSON(names);
+		var result = new HashMap<String, String>();
+		for (var i : names.keySet()) {
+			result.put(i, String.valueOf(names.get(i)));
+		}
+		return JsonHandler.mapToJSON(result);
 	}
 
 	public int count_by_number_of_participants(int numberOfParticipants) {
@@ -181,11 +191,17 @@ public class CollectionHandler {
 		}
 		ArrayList<String> genres = new ArrayList<>();
 		StringBuilder result = new StringBuilder();
+		boolean notFirst = false;
 		for (var i : collection) {
 			if (!genres.contains(i.getGenre().toString())) {
+				if (notFirst) {
+					result.append("\n");
+				}
+				notFirst = true;
 				genres.add(i.getGenre().toString());
+				result.append(i.getGenre().toString());
 			}
-			result.append(i.getGenre().toString()).append('\n');
+			
 		}
 		return result.toString();
 	}

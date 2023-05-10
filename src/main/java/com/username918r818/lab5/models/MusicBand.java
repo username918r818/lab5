@@ -21,13 +21,13 @@ public class MusicBand {
 	public MusicBand(UUID uuid, String name, Coordinates coordinates, java.time.ZonedDateTime creationDate,
 			long numberOfParticipants, MusicGenre genre,
 			Album bestAlbum) {
-		this.uuid = uuid;
-		this.name = name;
-		this.coordinates = coordinates;
-		this.creationDate = creationDate;
-		this.numberOfParticipants = numberOfParticipants;
-		this.genre = genre;
-		this.bestAlbum = bestAlbum;
+		this.setUUID(uuid);
+		this.setName(name);
+		this.setCoordinates(coordinates);
+		this.setCreationDate(creationDate);
+		this.setNumberOfParticipants(numberOfParticipants);
+		this.setGenre(genre);
+		this.setBestAlbum(bestAlbum);
 	}
 
 	public UUID getUUID() {

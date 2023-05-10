@@ -1,16 +1,19 @@
 package com.username918r818.lab5.commands;
 
-import com.username918r818.lab5.commandUtils.ConcreteCommand;
-import com.username918r818.lab5.commandUtils.Receiver;
+import com.username918r818.lab5.commandUtils.Invoker;
+import com.username918r818.lab5.commandUtils.abstractCommands.InvokerCommand;
 
-public class History extends ConcreteCommand {
-
-	public History(Receiver receiver, String... args) {
-		super(receiver, args);
+public class History extends InvokerCommand {
+	/**
+	 * @param invoker
+	 * @param args
+	 */
+	public History(Invoker invoker, String... args) {
+		super(invoker, args);
 	}
 
 	public void execute() {
-		super.getReceiver().history(getArgs());
+		super.getInvoker().history(getArgs());
 	}
 
 }

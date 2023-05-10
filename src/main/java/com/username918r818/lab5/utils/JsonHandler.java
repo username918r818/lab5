@@ -1,6 +1,8 @@
 package com.username918r818.lab5.utils;
 
-import java.util.Map;
+import java.util.HashMap;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonHandler {
@@ -11,8 +13,7 @@ public class JsonHandler {
 	 * @param m The Map object to be converted to JSON.
 	 * @return The JSON string representation of the Map object.
 	 */
-	@SuppressWarnings("rawtypes")
-	public static String mapToJSON(Map m) {
+	public static String mapToJSON(HashMap<String, String> m) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			String json = mapper.writeValueAsString(m);
@@ -29,12 +30,12 @@ public class JsonHandler {
 	 * @return A Map object representing the JSON data, or null if the conversion
 	 *         fails.
 	 */
-	@SuppressWarnings("rawtypes")
-	public static Map JSONToMap(String json) {
+	public static HashMap<String, String> JSONToMap(String json) {
 		ObjectMapper mapper = new ObjectMapper();
-		Map m;
-		try {
-			m = mapper.readValue(json, Map.class);
+		HashMap<String, String> m;
+		TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
+		try { 
+			m = mapper.readValue(json, typeRef);
 			return m;
 		} catch (Exception exception) {
 			return null;

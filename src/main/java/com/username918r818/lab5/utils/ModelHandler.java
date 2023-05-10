@@ -24,9 +24,13 @@ public class ModelHandler {
 		m.put("creationDate", mb.getCreationDate().toString());
 		m.put("numberOfParticipants", "" + mb.getNumberOfParticipants());
 		m.put("genre", mb.getGenre().toString());
-		m.put("aName", mb.getBestAlbum().getName());
-		m.put("aTracks", mb.getBestAlbum().getTracks().toString());
-		m.put("aSales", mb.getBestAlbum().getSales().toString());
+		if (mb.getBestAlbum() != null){
+			m.put("aName", mb.getBestAlbum().getName());
+			m.put("aTracks", mb.getBestAlbum().getTracks().toString());
+			if (mb.getBestAlbum().getSales() != null){
+				m.put("aSales", mb.getBestAlbum().getSales().toString());
+			}
+		}
 		return m;
 	}
 
@@ -38,7 +42,14 @@ public class ModelHandler {
 	 */
 	public static MusicBand mapToModel(Map<String, String> m) {
 		Coordinates coordinates = new Coordinates(Integer.parseInt(m.get("x")), Double.parseDouble(m.get("y")));
-		Album album = new Album(m.get("aName"), Integer.parseInt(m.get("aTracks")), Integer.parseInt(m.get("aSales")));
+		Album album = null;
+		if (m.get("aName") != null && m.get("aTracks") != null){
+			if(m.get("aSales") != null){
+				album = new Album(m.get("aName"), Integer.parseInt(m.get("aTracks")), Integer.parseInt(m.get("aSales")));
+			} else {
+				album = new Album(m.get("aName"), Integer.parseInt(m.get("aTracks")), null);
+			}
+		}
 		UUID uuid = UUID.fromString(m.get("UUID"));
 		String name = m.get("name");
 		ZonedDateTime zdt = ZonedDateTime.parse(m.get("creationDate"));
